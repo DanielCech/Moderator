@@ -49,9 +49,9 @@ public final class Moderator {
 		return URL(fileURLWithPath: CommandLine.arguments.first ?? "").lastPathComponent
 	}
 
-    public var usageFormText: String {
+    public var usageFormText: String = {
         return Moderator.commandName()
-    }
+    }()
 
 	public var usagetext: String {
 		let usagetexts = parsers.compactMap { $0.usage }
