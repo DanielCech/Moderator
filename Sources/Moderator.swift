@@ -49,10 +49,14 @@ public final class Moderator {
 		return URL(fileURLWithPath: CommandLine.arguments.first ?? "").lastPathComponent
 	}
 
+    public var usageFormText: String {
+        return Moderator.commandName()
+    }
+
 	public var usagetext: String {
 		let usagetexts = parsers.compactMap { $0.usage }
 		guard !usagetexts.isEmpty else {return ""}
-		return usagetexts.reduce(description + "Usage: \(Moderator.commandName())\n") {
+		return usagetexts.reduce(description + "Usage: \(usageFormText)\n") {
 			(acc:String, usagetext:UsageText) -> String in
 			return acc + format(usagetext: usagetext) + "\n"
 		}
