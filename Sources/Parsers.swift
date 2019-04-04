@@ -49,7 +49,7 @@ public struct ArgumentError: Error, CustomStringConvertible {
 
 extension Argument {
     static func isOption (index: Array<String>.Index, args: [String]) -> Bool {
-        if let i = args.index(of: "--"), i < index { return false }
+        if let i = args.firstIndex(of: "--"), i < index { return false }
         let argument = args[index]
         if argument.first == "-",
             let second = argument.dropFirst().first, !("0"..."9").contains(second) {
@@ -74,7 +74,7 @@ extension Argument {
 
         var argument = Argument<Bool>(usage: usage) { args in
             var args = args
-            guard let index = args.index(where: names.contains), isOption(index: index, args: args) else {
+            guard let index = args.firstIndex(where: names.contains), isOption(index: index, args: args) else {
                 return (false, args)
             }
             args.remove(at: index)
